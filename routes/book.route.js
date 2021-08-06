@@ -29,4 +29,16 @@ router.route("/").get((req, res) => {
   });
 });
 
+// GET single Book
+router.route("/get-book/:id").get((req, res) => {
+  const ID = req.params.id;
+  bookSchema.findById(ID, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.json(data);
+    }
+  })
+});
+
 module.exports = router;
