@@ -6,9 +6,10 @@ const dbConfig = require("./database/db");
 const app = express();
 
 // PORT
-const PORT = process.env.PORT || "localhost:5000";
+const PORT = process.env.PORT || 500;
 
 // Express Route
+const BOOK_ROUTE = require("./routes/book.route");
 
 // Connecting mongoDB Database
 mongoose.Promise = global.Promise;
@@ -28,8 +29,9 @@ mongoose
 
 app.use(express.json());
 app.use(cors());
+app.use("/api", BOOK_ROUTE);
 
-const SERVER = app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Connected to port: ${PORT}`);
 });
 
