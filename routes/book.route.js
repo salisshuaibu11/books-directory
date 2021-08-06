@@ -18,4 +18,15 @@ router.route("/create-book").post((req, res, next) => {
   });
 });
 
+// READ Books
+router.route("/").get((req, res) => {
+  bookSchema.find((error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.json(data);
+    }
+  });
+});
+
 module.exports = router;
