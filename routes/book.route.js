@@ -41,7 +41,7 @@ router.route("/get-book/:id").get((req, res) => {
   })
 });
 
-// UODATE a book
+// UPDATE a book
 router.route("/update-book/:id").put((req, res, next) => {
   const ID = req.params.id;
   bookSchema.findByIdAndUpdate(ID, {
@@ -52,6 +52,20 @@ router.route("/update-book/:id").put((req, res, next) => {
     } else {
       res.json(data);
       console.log("Book updated successfully")
+    }
+  });
+});
+
+// DELETE Book
+router.route("/delete-book/:id").delete((req, res, next) => {
+  const ID = req.params.id;
+  bookSchema.findByIdAndRemove(ID, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.status(200).json({
+        message: data
+      });
     }
   });
 });
